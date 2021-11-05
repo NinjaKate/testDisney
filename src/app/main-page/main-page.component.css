@@ -6,7 +6,7 @@
 .wrapper {
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-columns: 0.5fr 1.5fr;
+  grid-template-columns: 0.3fr 1.7fr;
   grid-template-rows: 0.1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
@@ -14,8 +14,22 @@
     "sidebar main";
 }
 
-.header { grid-area: header; }
-.sidebar { grid-area: sidebar; }
+.header {
+  grid-area: header;
+  padding: 20px;
+}
+
+.logo {
+  max-width: 100px;
+  max-height: 30px;
+  float: left;
+  padding-right: 10px;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  padding-left: 20px;
+}
 .main { grid-area: main; }
 
 .items-space {
@@ -26,9 +40,17 @@
 }
 
 .card {
-
+  /*min-height: 280px;*/
+  /*min-width: 300px;*/
 }
 
 .item-title {
   font-size: 16px;
+  word-wrap: break-word;
 }
+
+.item-img {
+  max-height: 280px;
+  max-width: 300px;
+}
+

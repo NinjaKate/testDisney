@@ -1,7 +1,8 @@
 <div class="container">
   <div class="wrapper">
     <div class="header">
-      <h1>Supper App</h1>
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Disney_wordmark.svg/1280px-Disney_wordmark.svg.png" alt="logo">
+      <h1 class="header-title">Supper App</h1>
     </div>
     <div class="sidebar">
       <h2>Characters</h2>
@@ -13,9 +14,9 @@
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image src="https://static.wikia.nocookie.net/disney/images/6/61/Olu_main.png/revision/latest?cb=20200630025227" alt="Character image">
+            <img class="item-img" src="{{item.imageUrl}}" alt="Character image">
             <mat-card-actions>
-              <button mat-button>Get more info</button>
+              <button (click)="openCharacterInfo(item.sourceUrl)" mat-button>Get more info</button>
             </mat-card-actions>
           </mat-card>
         </div>

@@ -22,11 +22,15 @@ export class MainPageComponent implements OnInit {
     this.paginator.pageIndex = event.pageIndex;
   }
 
+  openCharacterInfo(url: string) {
+    window.open(url);
+  }
+
   ngOnInit(): void {
     this.dataService.getRemoveData().subscribe((obj => {
       this.characters = obj.data;
       this.paginator.length = this.characters.length;
-      console.log(this.characters[0])
+      console.log(this.characters[1])
     }))
   }
 
