@@ -50,7 +50,16 @@
 }
 
 .item-img {
-  max-height: 280px;
-  max-width: 300px;
+  max-height: 250px;
+  max-width: 270px;
 }
 
+.action-section{
+  /*display: grid;*/
+  /*place-items: center;*/
+}
+
+.paginator {
+  margin-top: 20px;
+  margin-right: 20px;
+}

@@ -9,6 +9,7 @@ import {RouterModule} from "@angular/router";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
     MatPaginatorModule,
     HttpClientModule,
     MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
