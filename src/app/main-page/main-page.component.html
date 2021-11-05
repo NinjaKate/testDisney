@@ -1,1 +1,31 @@
-<p>main-page works!</p>
+<div class="container">
+  <div class="wrapper">
+    <div class="header">
+      <h1>Supper App</h1>
+    </div>
+    <div class="sidebar">
+      <h2>Characters</h2>
+    </div>
+    <div class="main">
+      <div class="items-space">
+        <div class="card" *ngFor="let item of characters.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize )">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title class="item-title">{{item.name}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="https://static.wikia.nocookie.net/disney/images/6/61/Olu_main.png/revision/latest?cb=20200630025227" alt="Character image">
+            <mat-card-actions>
+              <button mat-button>Get more info</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <mat-paginator [length]="paginator.length"
+                     [pageSize]="paginator.pageSize"
+                     [pageSizeOptions]="[10, 25, 50]"
+                     (page)="setPage($event)"
+                     aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
