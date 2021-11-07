@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../services/data.service";
+import {Character} from "../models/character.model";
+import {Paginator} from "../models/paginator.model";
 
 @Component({
   selector: 'app-main-page',
@@ -7,8 +9,8 @@ import {DataService} from "../services/data.service";
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-  characters: any[] = [];
-  paginator: any = {
+  characters: Array<Character> = [];
+  paginator: Paginator = {
     pageSize: 10,
     pageIndex: 0,
     length: 0,

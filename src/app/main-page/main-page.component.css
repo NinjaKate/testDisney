@@ -43,6 +43,7 @@
 .big-img {
   float: left;
   margin-bottom: 10px;
+  max-width: 200px;
 }
 
 .close-button {
@@ -75,10 +76,19 @@
   font-weight: bold;
 }
 
-.item-img {
-  width: 160px;
+.item-img-container {
+  width: 200px;
   height: 140px;
-  margin-left: 25px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.item-img-container img {
+  width: auto;
+  height: 100%;
 }
 
 .info-button {

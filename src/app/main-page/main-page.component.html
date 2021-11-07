@@ -37,7 +37,9 @@
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
-            <img class="item-img" src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
+            <div class="item-img-container">
+            <img  src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
+            </div>
             <mat-card-actions class="action-section">
               <button (click)="openCharacterInfo(item.sourceUrl)" class="info-button" mat-stroked-button color="primary">Get more info on Wiki</button>
             </mat-card-actions>
