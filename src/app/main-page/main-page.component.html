@@ -8,11 +8,13 @@
     </div>
     <div class="sidebar">
         <h2>Character</h2>
-      <div *ngIF="!characterToShow">
-        <h3>Click on character's card to see more information</h3>
-      </div>
-      <div *ngIf="characterToShow">
-        <img src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
+      <h4 *ngIf="characterToShow === null">Click on character's card to see more information</h4>
+      <div *ngIf="characterToShow" class="sidebar-inner">
+        <img class="big-img" src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
+        <button mat-icon-button color="warn" class="close-button" (click)="characterToShow = null">
+          <mat-icon>close</mat-icon>
+        </button>
+        <div class="sidebar-info">
         <h3>Name: {{characterToShow.name || '-'}}</h3>
         <p>Allies: {{characterToShow.allies.join(', ') || '-'}}</p>
         <p>Created at: {{characterToShow.createdAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
@@ -24,6 +26,7 @@
         <p>Updated at: {{characterToShow.updatedAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
         <p>Url: {{characterToShow.url || '-'}}</p>
         <p>Id: {{characterToShow._id || '-'}}</p>
+        </div>
       </div>
     </div>
     <div class="main">

@@ -35,6 +35,26 @@
   grid-area: sidebar;
   padding-left: 20px;
 }
+
+.sidebar-inner {
+  padding: 10px;
+}
+
+.big-img {
+  float: left;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  float: right;
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.sidebar-info {
+  float: left;
+}
+
 .main { grid-area: main; }
 
 .items-space {
