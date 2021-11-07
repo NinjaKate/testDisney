@@ -40,12 +40,11 @@ export class MainPageComponent implements OnInit {
     }
   }
 
-  showMoreInformation(item: any) {
+  showMoreInformation(item: Character) {
     this.characterToShow = item;
   }
 
   scrollToElement($element: any): void {
-    console.log($element);
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
@@ -53,7 +52,6 @@ export class MainPageComponent implements OnInit {
     this.dataService.getRemoveData().subscribe((obj => {
       this.characters = obj.data;
       this.paginator.length = this.characters.length;
-      console.log(this.characters)
     }))
   }
 
