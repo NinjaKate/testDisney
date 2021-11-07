@@ -7,17 +7,23 @@
         <h1 class="header-title">Supper App</h1>
     </div>
     <div class="sidebar">
-        <h2>Characters</h2>
+        <h2>Character</h2>
+      <div *ngIf="characterToShow">
+        <img class="item-img" src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
+        <h5 class="item-title">Name: {{characterToShow.name || '-'}}</h5>
+        <p>Films: {{characterToShow.films.join(', ') || '-'}}</p>
+        <p>{{characterToShow.createdAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+      </div>
     </div>
     <div class="main">
       <div class="items-space">
         <div class="card"
              *ngFor="let item of characters.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize )">
-          <mat-card class="example-card">
+          <mat-card (click)="showMoreInformation(item)" class="example-card">
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
-            <img class="item-img" src="{{item.imageUrl}}" alt="Character image">
+            <img class="item-img" src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
             <mat-card-actions class="action-section">
               <button (click)="openCharacterInfo(item.sourceUrl)" mat-stroked-button color="primary">Get more info</button>
             </mat-card-actions>
