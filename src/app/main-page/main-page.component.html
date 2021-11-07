@@ -17,13 +17,13 @@
         <div class="sidebar-info">
         <h3>Name: {{characterToShow.name || '-'}}</h3>
         <p>Allies: {{characterToShow.allies.join(', ') || '-'}}</p>
-        <p>Created at: {{characterToShow.createdAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+        <p>Created at: {{characterToShow.createdAt | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
         <p>Enemies: {{characterToShow.enemies.join(', ') || '-'}}</p>
         <p>Films: {{characterToShow.films.join(', ') || '-'}}</p>
         <p>Park Attractions: {{characterToShow.parkAttractions.join(', ') || '-'}}</p>
         <p>Short films: {{characterToShow.shortFilms.join(', ') || '-'}}</p>
         <p>TV shows: {{characterToShow.tvShows.join(', ') || '-'}}</p>
-        <p>Updated at: {{characterToShow.updatedAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+        <p>Updated at: {{characterToShow.updatedAt | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
         <p>Url: {{characterToShow.url || '-'}}</p>
         <p>Id: {{characterToShow._id || '-'}}</p>
         </div>
@@ -33,7 +33,7 @@
       <div class="items-space">
         <div class="card"
              *ngFor="let item of characters.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize )">
-          <mat-card (click)="showMoreInformation(item)" (click)="scrollToElement(target)" class="example-card">
+          <mat-card (click)="showMoreInformation(item); scrollToElement(target)" class="example-card">
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
