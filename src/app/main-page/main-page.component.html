@@ -1,6 +1,6 @@
 <div class="container">
   <div class="wrapper">
-    <div class="header">
+    <div class="header" #target>
         <img class="logo"
              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Disney_wordmark.svg/1280px-Disney_wordmark.svg.png"
              alt="logo">
@@ -8,24 +8,35 @@
     </div>
     <div class="sidebar">
         <h2>Character</h2>
+      <div *ngIF="!characterToShow">
+        <h3>Click on character's card to see more information</h3>
+      </div>
       <div *ngIf="characterToShow">
-        <img class="item-img" src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
-        <h5 class="item-title">Name: {{characterToShow.name || '-'}}</h5>
+        <img src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
+        <h3>Name: {{characterToShow.name || '-'}}</h3>
+        <p>Allies: {{characterToShow.allies.join(', ') || '-'}}</p>
+        <p>Created at: {{characterToShow.createdAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+        <p>Enemies: {{characterToShow.enemies.join(', ') || '-'}}</p>
         <p>Films: {{characterToShow.films.join(', ') || '-'}}</p>
-        <p>{{characterToShow.createdAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+        <p>Park Attractions: {{characterToShow.parkAttractions.join(', ') || '-'}}</p>
+        <p>Short films: {{characterToShow.shortFilms.join(', ') || '-'}}</p>
+        <p>TV shows: {{characterToShow.tvShows.join(', ') || '-'}}</p>
+        <p>Updated at: {{characterToShow.updatedAt | date: 'dd.MM.yyyy ss:mm:hh'}}</p>
+        <p>Url: {{characterToShow.url || '-'}}</p>
+        <p>Id: {{characterToShow._id || '-'}}</p>
       </div>
     </div>
     <div class="main">
       <div class="items-space">
         <div class="card"
              *ngFor="let item of characters.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize )">
-          <mat-card (click)="showMoreInformation(item)" class="example-card">
+          <mat-card (click)="showMoreInformation(item)" (click)="scrollToElement(target)" class="example-card">
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
             <img class="item-img" src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
             <mat-card-actions class="action-section">
-              <button (click)="openCharacterInfo(item.sourceUrl)" mat-stroked-button color="primary">Get more info</button>
+              <button (click)="openCharacterInfo(item.sourceUrl)" class="info-button" mat-stroked-button color="primary">Get more info on Wiki</button>
             </mat-card-actions>
           </mat-card>
         </div>

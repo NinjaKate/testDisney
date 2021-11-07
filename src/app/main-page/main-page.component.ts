@@ -13,7 +13,7 @@ export class MainPageComponent implements OnInit {
     pageIndex: 0,
     length: 0,
   };
-  characterToShow: any;
+  characterToShow: any = null;
 
   constructor(private dataService: DataService) {}
 
@@ -40,6 +40,11 @@ export class MainPageComponent implements OnInit {
 
   showMoreInformation(item: any) {
     this.characterToShow = item;
+  }
+
+  scrollToElement($element: any): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
   ngOnInit(): void {
