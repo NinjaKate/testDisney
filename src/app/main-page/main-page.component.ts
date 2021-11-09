@@ -11,18 +11,35 @@ import {Paginator} from "../models/paginator.model";
 export class MainPageComponent implements OnInit {
   characters: Array<Character> = [];
   paginator: Paginator = {
-    pageSize: 10,
+    pageSize: 50,
     pageIndex: 0,
     length: 0,
   };
-  characterToShow: any = null;
+  characterToShow: Character = {
+    allies: [],
+    createdAt: '',
+    enemies: [],
+    films: [],
+    imageUrl: '',
+    name: '',
+    parkAttractions: [],
+    shortFilms: [],
+    sourceUrl: '',
+    tvShows: [],
+    updatedAt: '',
+    url: '',
+    videoGames: [],
+    __v: 0,
+    _id: 0
+  };
 
   constructor(private dataService: DataService) {}
 
   setPage(event: any): void {
     this.paginator.pageSize = event.pageSize;
     this.paginator.pageIndex = event.pageIndex;
-    this.characterToShow = null;
+    this.getDataByPage(this.paginator.pageIndex + 1);
+    this.clearCharacterToShow();
   }
 
   openCharacterInfo(url: string): void {
@@ -35,6 +52,10 @@ export class MainPageComponent implements OnInit {
       return imgUrl.substring(0, url.indexOf('.png') + 4);
     } else if (url.includes('.jpg')) {
       return imgUrl.substring(0, url.indexOf('.jpg') + 4);
+    } else if (url.includes('.gif')) {
+      return imgUrl.substring(0, url.indexOf('.gif') + 4);
+    } else if (url.includes('.webp')) {
+      return imgUrl.substring(0, url.indexOf('.webp') + 5);
     } else {
       return imgUrl.substring(0, url.indexOf('.jpeg') + 5);
     }
@@ -48,12 +69,37 @@ export class MainPageComponent implements OnInit {
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
-  ngOnInit(): void {
-    this.dataService.getRemoveData().subscribe((obj => {
+  getDataByPage(page:number):void {
+    this.dataService.getRemoteData(page).subscribe((obj => {
       this.characters = obj.data;
-      this.paginator.length = this.characters.length;
-    }))
+      this.paginator.length = obj.totalPages * obj.count;
+
+    }));
   }
 
+  clearCharacterToShow() {
+    this.characterToShow = {
+      allies: [],
+      createdAt: '',
+      enemies: [],
+      films: [],
+      imageUrl: '',
+      name: '',
+      parkAttractions: [],
+      shortFilms: [],
+      sourceUrl: '',
+      tvShows: [],
+      updatedAt: '',
+      url: '',
+      videoGames: [],
+      __v: 0,
+      _id: 0
+    };
+  }
+
+  ngOnInit(): void {
+    this.clearCharacterToShow();
+    this.getDataByPage(1);
+  }
 
 }

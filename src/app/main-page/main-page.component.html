@@ -8,10 +8,11 @@
     </div>
     <div class="sidebar">
         <h2>Character</h2>
-      <h4 *ngIf="characterToShow === null">Click on character's card to see more information</h4>
-      <div *ngIf="characterToShow" class="sidebar-inner">
-        <img class="big-img" src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
-        <button mat-icon-button color="warn" class="close-button" (click)="characterToShow = null">
+      <h4 *ngIf="characterToShow._id === 0">Click on character's card to see more information</h4>
+      <div *ngIf="characterToShow._id !== 0" class="sidebar-inner">
+        <img *ngIf="characterToShow.imageUrl" class="big-img" src="{{getImageUrl(characterToShow.imageUrl)}}" alt="Character image">
+        <p *ngIf="!characterToShow.imageUrl">No image</p>
+        <button mat-icon-button color="warn" class="close-button" (click)="clearCharacterToShow()">
           <mat-icon>close</mat-icon>
         </button>
         <div class="sidebar-info">
@@ -30,15 +31,24 @@
       </div>
     </div>
     <div class="main">
+      <mat-paginator [length]="paginator.length"
+                     [pageSize]="paginator.pageSize"
+                     [pageSizeOptions]="[50]"
+                     (page)="setPage($event)"
+                     class="paginator"
+                     showFirstLastButtons
+                     aria-label="Select page">
+      </mat-paginator>
       <div class="items-space">
-        <div class="card"
-             *ngFor="let item of characters.slice(paginator.pageIndex * paginator.pageSize, (paginator.pageIndex + 1) * paginator.pageSize )">
-          <mat-card (click)="showMoreInformation(item); scrollToElement(target)" class="example-card">
+        <div
+             *ngFor="let item of characters">
+          <mat-card class="card" (click)="showMoreInformation(item); scrollToElement(target)">
             <mat-card-header>
               <mat-card-title class="item-title">{{item.name}}</mat-card-title>
             </mat-card-header>
             <div class="item-img-container">
-            <img  src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
+            <img *ngIf="item.imageUrl" src="{{getImageUrl(item.imageUrl)}}" alt="Character image">
+              <p *ngIf="!item.imageUrl">No image</p>
             </div>
             <mat-card-actions class="action-section">
               <button (click)="openCharacterInfo(item.sourceUrl)" class="info-button" mat-stroked-button color="primary">Get more info on Wiki</button>
@@ -48,7 +58,7 @@
       </div>
       <mat-paginator [length]="paginator.length"
                      [pageSize]="paginator.pageSize"
-                     [pageSizeOptions]="[10, 25, 50]"
+                     [pageSizeOptions]="[50]"
                      (page)="setPage($event)"
                      class="paginator"
                      showFirstLastButtons
